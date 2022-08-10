@@ -1,3 +1,5 @@
+using Ecommerce.BLL.Interfaces;
+using Ecommerce.BLL.Repository;
 using Ecommerce.DAL.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,7 +27,9 @@ namespace Ecommerce
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           
             services.AddControllersWithViews();
+            services.AddScoped(typeof(IGenericRepository<>) , typeof(GenericRepository<>));
             services.AddDbContext<EcommerceContext>(option =>
             {
                 option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));

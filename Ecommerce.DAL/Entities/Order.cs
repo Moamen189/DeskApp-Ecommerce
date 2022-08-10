@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.DAL.Entities
 {
-    public class Order
+    public class Order : BaseEntity
     {
         public Order()
         {
             this.OrderTime = DateTime.Now;
         }
-        public int Id { get; set; }
-
+       
         public DateTime OrderTime { get; set; }
 
         public int CustomerId { get; set; }
