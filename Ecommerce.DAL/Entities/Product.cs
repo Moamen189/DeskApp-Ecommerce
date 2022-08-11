@@ -28,7 +28,8 @@ namespace Ecommerce.DAL.Entities
 
         public string ProductUser { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new HashSet<OrderProduct>();
+
 
 
 
