@@ -1,4 +1,5 @@
 using Ecommerce.BLL.Interfaces;
+using Ecommerce.BLL.Mapper;
 using Ecommerce.BLL.Repository;
 using Ecommerce.DAL.Context;
 using Microsoft.AspNetCore.Builder;
@@ -34,6 +35,7 @@ namespace Ecommerce
             {
                 option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+            services.AddAutoMapper(X => X.AddProfile(new DomainProfile()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

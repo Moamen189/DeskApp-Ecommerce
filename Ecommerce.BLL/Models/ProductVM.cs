@@ -1,14 +1,16 @@
-﻿using System;
+﻿using Ecommerce.DAL.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ecommerce.DAL.Entities
+namespace Ecommerce.BLL.Models
 {
-    public class Product :BaseEntity
+    public class ProductVM
     {
+        public int ID { get; set; }
         [Required]
 
         public string Name { get; set; }
@@ -28,13 +30,6 @@ namespace Ecommerce.DAL.Entities
 
         public string ProductUser { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
-
-
-
-
-
-
-
+        public virtual ICollection<Order> Orders { get; set; } 
     }
 }
