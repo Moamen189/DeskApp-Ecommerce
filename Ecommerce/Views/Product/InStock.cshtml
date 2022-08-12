@@ -1,0 +1,36 @@
+﻿
+@inject IGenericRepository<Product> productRepo
+
+<h1>InStock</h1>
+
+<select class="form-control" id="productId">
+    <option disabled selected>Choose Product</option>
+    @foreach (var item in await productRepo.GetAll())
+    {
+        <option value="@item.Id">@item.Name</option>
+    }
+</select>
+
+<button class="btn btn-primary" type="submit" id="prodBtn">Check</button>
+
+<div id="value" style="width: 50%; height: 200px; background-color: #09c;">
+
+</div>
+
+<script src="~/src/scripts/jquery.min.js"></script>
+
+<script>
+$(function() {
+    $("#prodBtn").click(function() {
+        var productId = $("#productId").val();
+        $.ajax({
+            type: "POST",
+            url: "/Product/InStock",
+            data: {id : productId},
+            success: function(res) {
+                $("#value").append("<h4>" + res + "</h4>");
+            }
+        });
+    });
+});
+</script>
