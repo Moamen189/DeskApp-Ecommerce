@@ -112,5 +112,13 @@ namespace Ecommerce.Controllers
             return View();
         }
 
+        [HttpPost]
+
+        public JsonResult InStock(int id)
+        {
+            var data = _productRepository.ProductInStock(id);
+            return Json(data);
+        }
+
     }
 }
