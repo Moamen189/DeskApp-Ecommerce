@@ -31,6 +31,8 @@ namespace Ecommerce
            
             services.AddControllersWithViews();
             services.AddScoped(typeof(IGenericRepository<>) , typeof(GenericRepository<>));
+            services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
+
             services.AddDbContext<EcommerceContext>(option =>
             {
                 option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));

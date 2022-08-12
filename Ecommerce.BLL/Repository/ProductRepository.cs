@@ -1,0 +1,26 @@
+﻿using Ecommerce.BLL.Interfaces;
+using Ecommerce.DAL.Context;
+using Ecommerce.DAL.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Ecommerce.BLL.Repository
+{
+    public class ProductRepository : IProductRepository
+    {
+        private readonly EcommerceContext _context;
+
+        public ProductRepository(EcommerceContext context)
+        {
+            _context = context;
+        }
+        public int ProductInStock(int id)
+        {
+           var data = _context.Products.Where(p => p.Id == id).Select(p => p.Quantity).FirstOrDefault();
+            return data;
+        }
+    }
+}

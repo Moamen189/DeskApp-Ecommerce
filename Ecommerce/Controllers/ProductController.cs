@@ -11,12 +11,15 @@ namespace Ecommerce.Controllers
     public class ProductController : Controller
     {
         private readonly IGenericRepository<Product> _repository;
+        private readonly IProductRepository _productRepository;
+
         //private readonly IOrderProductRepo _productRepo;
         private readonly IMapper _mapper;
 
-        public ProductController(IGenericRepository<Product> repository/*, IOrderProductRepo productRepo*/, IMapper mapper)
+        public ProductController(IGenericRepository<Product> repository , IProductRepository productRepository, IMapper mapper)
         {
             _repository = repository;
+            _productRepository = productRepository;
             //_productRepo = productRepo;
             _mapper = mapper;
         }
@@ -101,6 +104,12 @@ namespace Ecommerce.Controllers
             await _repository.Delete(data);
 
             return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> InStock()
+        {
+            var data =  await _repository.GetAll();
+            return View();
         }
 
     }
