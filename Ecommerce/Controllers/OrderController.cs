@@ -63,7 +63,7 @@ namespace Ecommerce.Controllers
             }
             return View(Order);
         }
-        [HttpPost]
+        
 
         public async Task<IActionResult> Delete(int? id)
         {
