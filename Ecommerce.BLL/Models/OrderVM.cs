@@ -16,6 +16,6 @@ namespace Ecommerce.BLL.Models
 
         public Customer Customer { get; set; }
 
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

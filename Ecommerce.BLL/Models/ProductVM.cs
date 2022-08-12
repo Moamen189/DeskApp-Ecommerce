@@ -30,6 +30,6 @@ namespace Ecommerce.BLL.Models
 
         public string ProductUser { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; } 
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; } 
     }
 }

@@ -8,32 +8,32 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Controllers
 {
-    public class OrderController : Controller
+    public class CustomerController : Controller
     {
-        private readonly IGenericRepository<Order> _repository;
-        private readonly IGenericRepository<OrderProduct> _orderProduct;
+        private readonly IGenericRepository<Customer> _repository;
+       
         private readonly IMapper _mapper;
 
-        public OrderController(IGenericRepository<Order> repository, IGenericRepository<OrderProduct> orderProduct, IMapper mapper)
+        public CustomerController(IGenericRepository<Customer> repository, IMapper mapper)
         {
             _repository = repository;
-            _orderProduct = orderProduct;
+            
             _mapper = mapper;
         }
         public async Task<IActionResult> Index()
         {
             var data = await _repository.GetAll();
-            var mappedOrder = _mapper.Map<IEnumerable<OrderVM>>(data);
+            var mappedOrder = _mapper.Map<IEnumerable<CustomerVM>>(data);
             return View(mappedOrder);
         }
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
                 return NotFound();
-            var order = await _repository.GetById(id);
-            if (order == null)
+            var customer = await _repository.GetById(id);
+            if (customer == null)
                 return NotFound();
-            return View(order);
+            return View(customer);
         }
         public IActionResult Create()
         {
@@ -42,21 +42,15 @@ namespace Ecommerce.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(OrderVM order)
+        public async Task<IActionResult> Create(CustomerVM customer)
         {
             if (ModelState.IsValid)
             {
-                var data = await _repository.Create(_mapper.Map<Order>(order));
-                foreach (var item in order.ProductId)
-                {
-                    var orderProduct = new OrderProduct() { OrderId = data, ProductId = item };
-                    await _orderProduct.Create(orderProduct);
-
-                    //_productRepo.Create(data,item);
-                }
+                 await _repository.Create(_mapper.Map<Customer>(customer));
+               
                 return RedirectToAction("Index");
             }
-            return View(order);
+            return View(customer);
         }
         [HttpPost]
         public async Task<IActionResult> Delete(int? id)
@@ -74,21 +68,21 @@ namespace Ecommerce.Controllers
         {
             if (id == null)
                 return NotFound();
-            var order = await _repository.GetById(id);
-            if (order == null)
+            var Customer = await _repository.GetById(id);
+            if (Customer == null)
                 return NotFound();
-            return View(_mapper.Map<OrderVM>(order));
+            return View(_mapper.Map<CustomerVM>(Customer));
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(OrderVM order)
+        public async Task<IActionResult> Update(CustomerVM customer)
         {
             if (ModelState.IsValid)
             {
-                await _repository.Update(_mapper.Map<Order>(order));
+                await _repository.Update(_mapper.Map<Customer>(customer));
                 return RedirectToAction("Index");
             }
-            return View(order);
+            return View(customer);
         }
     }
 }

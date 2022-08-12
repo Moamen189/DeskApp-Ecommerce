@@ -1,0 +1,27 @@
+﻿@model OrderVM
+@inject IGenericRepository<Customer> customer
+@inject IGenericRepository<Product> product
+
+<form asp-action="Create">
+    <input type="hidden" asp-for="ID" />
+
+    <select asp-for="CustomerId">
+        <option value="default">Choose Customer</option>
+        @foreach (var item in await customer.GetAll())
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    </select>
+
+    <select asp-for="ProductId" class="form-control custom-select2 select2-hidden-accessible"
+            multiple="" style="width:100%;" data-select2-id="4" tabindex="-1"
+            aria-hidden="true">
+        <option value="default">Choose Product</option>
+        @foreach (var item in await product.GetAll())
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    </select>
+
+    <button class="btn btn-success" type="submit">Add Order</button>
+</form>
