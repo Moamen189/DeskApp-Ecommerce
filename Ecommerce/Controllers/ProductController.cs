@@ -11,13 +11,13 @@ namespace Ecommerce.Controllers
     public class ProductController : Controller
     {
         private readonly IGenericRepository<Product> _repository;
-        private readonly IOrderProductRepo _productRepo;
+        //private readonly IOrderProductRepo _productRepo;
         private readonly IMapper _mapper;
 
-        public ProductController(IGenericRepository<Product> repository, IOrderProductRepo productRepo, IMapper mapper)
+        public ProductController(IGenericRepository<Product> repository/*, IOrderProductRepo productRepo*/, IMapper mapper)
         {
             _repository = repository;
-            _productRepo = productRepo;
+            //_productRepo = productRepo;
             _mapper = mapper;
         }
         public async Task<IActionResult> Index()
