@@ -21,8 +21,8 @@
                     <td>
                         <h5 class="font-16">@item.OrderTime</h5>
                     </td>
-                    <td>@item.Customer.Name</td>
-                    <td>@item.Customer.Phone</td>
+                    <td>@item.Customer?.Name</td>
+                    <td>@item.Customer?.Phone</td>
                     <td>
                         @foreach (var i in item.OrderProducts)
                         {
