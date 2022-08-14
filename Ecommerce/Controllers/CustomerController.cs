@@ -13,12 +13,14 @@ namespace Ecommerce.Controllers
         private readonly IGenericRepository<Customer> _repository;
        
         private readonly IMapper _mapper;
+        private readonly ICustomerRepository _customerRepository;
 
-        public CustomerController(IGenericRepository<Customer> repository, IMapper mapper)
+        public CustomerController(IGenericRepository<Customer> repository, IMapper mapper , ICustomerRepository customerRepository)
         {
             _repository = repository;
             
             _mapper = mapper;
+            _customerRepository = customerRepository;
         }
         public async Task<IActionResult> Index()
         {
@@ -83,6 +85,19 @@ namespace Ecommerce.Controllers
                 return RedirectToAction("Index");
             }
             return View(customer);
+        }
+
+        public IActionResult CheckProducts()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> CheckProducts(int id)
+        {
+            var data = await _customerRepository.GetProductsByCusomerId(id);
+            var model = _mapper.Map<IEnumerable<ProductVM>>(data);
+
+            return Json(model);
         }
     }
 }
