@@ -33,6 +33,10 @@ namespace Ecommerce
             services.AddScoped(typeof(IGenericRepository<>) , typeof(GenericRepository<>));
             services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
             services.AddScoped(typeof(ICustomerRepository), typeof(CustomerRepository));
+            services.AddScoped(typeof(IOrderProductRepo), typeof(OrderProductRepo));
+
+
+
 
 
             services.AddDbContext<EcommerceContext>(option =>

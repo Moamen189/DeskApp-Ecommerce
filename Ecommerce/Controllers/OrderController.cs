@@ -8,16 +8,19 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Controllers
 {
-    public class OrderController : Controller
+    public class OrderController : Controller 
     {
         private readonly IGenericRepository<Order> _repository;
         private readonly IGenericRepository<OrderProduct> _orderProduct;
+        //private readonly IOrderProductRepo orderProductRepo;
         private readonly IMapper _mapper;
 
-        public OrderController(IGenericRepository<Order> repository, IGenericRepository<OrderProduct> orderProduct, IMapper mapper)
+        public OrderController(IGenericRepository<Order> repository, IGenericRepository<OrderProduct> orderProduct /*IOrderProductRepo orderProductRepo*/
+            , IMapper mapper)
         {
             _repository = repository;
             _orderProduct = orderProduct;
+            //this.orderProductRepo = orderProductRepo;
             _mapper = mapper;
         }
         public async Task<IActionResult> Index()
@@ -52,7 +55,7 @@ namespace Ecommerce.Controllers
                     var orderProduct = new OrderProduct() { OrderId = data, ProductId = item };
                     await _orderProduct.Create(orderProduct);
 
-                    //_productRepo.Create(data,item);
+                    //orderProductRepo.Create(data,item);
                 }
                 return RedirectToAction("Index");
             }

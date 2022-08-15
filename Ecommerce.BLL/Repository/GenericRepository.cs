@@ -23,7 +23,6 @@ namespace Ecommerce.BLL.Repository
             _context.Set<T>().Add(obj);
             return await _context.SaveChangesAsync();
         }
-
         public async Task<int> Delete(T obj)
         {
             _context.Set<T>().Remove(obj);
@@ -31,10 +30,20 @@ namespace Ecommerce.BLL.Repository
         }
 
         public async Task<IEnumerable<T>> GetAll()
-        => await _context.Set<T>().ToListAsync();
+        {
+            if (typeof(T) == typeof(Order))
+            {
+                return (IEnumerable<T>)await _context.Set<Order>().Include(E => E.Customer).Include(P => P.OrderProducts).ThenInclude(p => p.Product).Distinct().ToListAsync();
+            }
+            else
+            {
+                return await _context.Set<T>().ToListAsync();
+            }
+        }
+
 
         public async Task<T> GetById(int? id)
-        => await _context.Set<T>().FindAsync(id);
+            => await _context.Set<T>().FindAsync(id);
 
         public async Task<int> Update(T obj)
         {
