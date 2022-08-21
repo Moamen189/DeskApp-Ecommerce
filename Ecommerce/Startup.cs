@@ -54,7 +54,7 @@ namespace Ecommerce
 
             services.AddDbContext<EcommerceContext>(option =>
             {
-                option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                option.UseSqlServer(Configuration.GetConnectionString("ConnectionStr"));
             });
             services.AddAutoMapper(X => X.AddProfile(new DomainProfile()));
         }

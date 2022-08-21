@@ -24,6 +24,9 @@ namespace Ecommerce.DAL.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OrderProduct>().HasKey(a => new { a.OrderId, a.ProductId });
+            modelBuilder.Entity<Customer>().HasOne<Order>(X => X.Order).WithOne(X => X.Customer)
+                .HasForeignKey<Order>();
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

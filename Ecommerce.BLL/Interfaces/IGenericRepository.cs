@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.BLL.Interfaces
 {
-    public interface IGenericRepository<T> where T : BaseEntity
+    public interface IGenericRepository<T> 
     {
          Task<IEnumerable<T>> GetAll();
          Task<T> GetById(int? id);
