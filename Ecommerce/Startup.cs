@@ -2,9 +2,12 @@ using Ecommerce.BLL.Interfaces;
 using Ecommerce.BLL.Mapper;
 using Ecommerce.BLL.Repository;
 using Ecommerce.DAL.Context;
+using Ecommerce.DAL.Entities;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,7 +37,17 @@ namespace Ecommerce
             services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
             services.AddScoped(typeof(ICustomerRepository), typeof(CustomerRepository));
             services.AddScoped(typeof(IOrderProductRepo), typeof(OrderProductRepo));
-
+            services.AddIdentity<Customer, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+            }).AddEntityFrameworkStores<EcommerceContext>() /// Identity ---> Customer
+            .AddTokenProvider<DataProtectorTokenProvider<Customer>>(TokenOptions.DefaultProvider);
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Home/Error");
+                });
 
 
 
@@ -63,7 +76,7 @@ namespace Ecommerce
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
