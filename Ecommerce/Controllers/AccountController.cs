@@ -46,9 +46,23 @@ namespace Ecommerce.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Login(LoginVM loginVm )
+        public async Task<IActionResult> Login(LoginVM loginVm)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                var customer = await _userManager.FindByEmailAsync(loginVm.Email);
+                if (Customer != null)
+                {
+                    await _signInManager.SignInAsync(customer, true);
+                    return RedirectToAction("Index", "Product");
+                }
+                ModelState.AddModelError(string.Empty, "InValid Email");
+            }
+            return View(loginVm);
+        }
+        public async Task<IActionResult> SignOut()
+        {
+            await _signInManager.SignOutAsync();
         }
     }
 }
