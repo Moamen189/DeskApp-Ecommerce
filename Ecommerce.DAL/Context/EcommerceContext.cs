@@ -1,4 +1,5 @@
 ﻿using Ecommerce.DAL.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.DAL.Context
 {
-    public class EcommerceContext:DbContext
+    public class EcommerceContext:IdentityDbContext<Customer>
     {
         public EcommerceContext(DbContextOptions<EcommerceContext> Options):base(Options)
         {

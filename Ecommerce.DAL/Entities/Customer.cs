@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Ecommerce.DAL.Entities
 {
-    public class Customer : BaseEntity
+    public class Customer : IdentityUser
     {
         [Required]
         [MaxLength(50)]
