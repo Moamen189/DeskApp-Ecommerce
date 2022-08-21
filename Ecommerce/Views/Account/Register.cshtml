@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+<div class="register-page-wrap d-flex align-items-center flex-wrap justify-content-center">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-md-6 col-lg-7">
+						<img src="vendors/images/register-page-img.png" alt="">
+					</div>
+					<div class="col-md-6 col-lg-5">
+						<div class="register-box bg-white box-shadow border-radius-10">
+							<div class="wizard-content">
+								<form asp-action="Register" class="tab-wizard2 wizard-circle wizard clearfix" role="application" id="steps-uid-0"><div class="steps clearfix"><ul role="tablist"><li role="tab" class="first current" aria-disabled="false" aria-selected="true"><a id="steps-uid-0-t-0" href="#steps-uid-0-h-0" aria-controls="steps-uid-0-p-0"><span class="current-info audible">current step: </span><span class="step">1</span> <span class="info">Basic Account Credentials</span></a></li><li role="tab" class="disabled" aria-disabled="true"><a id="steps-uid-0-t-1" href="#steps-uid-0-h-1" aria-controls="steps-uid-0-p-1"><span class="step">2</span> <span class="info">Personal Information</span></a></li><li role="tab" class="disabled" aria-disabled="true"><a id="steps-uid-0-t-2" href="#steps-uid-0-h-2" aria-controls="steps-uid-0-p-2"><span class="step">3</span> <span class="info">Payment Method &amp; Info</span></a></li><li role="tab" class="disabled last" aria-disabled="true"><a id="steps-uid-0-t-3" href="#steps-uid-0-h-3" aria-controls="steps-uid-0-p-3"><span class="step">4</span> <span class="info">Overview Information</span></a></li></ul></div><div class="content clearfix">
+									<h5 id="steps-uid-0-h-0" tabindex="-1" class="title current">Basic Account Credentials</h5>
+									<section id="steps-uid-0-p-0" role="tabpanel" aria-labelledby="steps-uid-0-h-0" class="body current" aria-hidden="false">
+										<div class="form-wrap max-width-600 mx-auto">
+											<div class="form-group row">
+												<label class="col-sm-4 col-form-label">Email Address*</label>
+												<div class="col-sm-8">
+													<input type="email" class="form-control">
+												</div>
+											</div>
+										
+											<div class="form-group row">
+												<label class="col-sm-4 col-form-label">Password*</label>
+												<div class="col-sm-8">
+													<input type="password" class="form-control">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label class="col-sm-4 col-form-label">Confirm Password*</label>
+												<div class="col-sm-8">
+													<input type="password" class="form-control">
+												</div>
+											</div>
+										</div>
+									</section>
+									<input type="submit" value="Register"/>
+                                  </form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
