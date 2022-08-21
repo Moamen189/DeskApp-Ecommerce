@@ -60,9 +60,11 @@ namespace Ecommerce.Controllers
             }
             return View(loginVm);
         }
-        public async Task<IActionResult> SignOut()
+        public async new Task<IActionResult> SignOut()
         {
             await _signInManager.SignOutAsync();
+           return RedirectToAction(nameof(Login));
+
         }
     }
 }
