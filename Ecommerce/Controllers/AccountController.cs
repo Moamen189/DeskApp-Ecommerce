@@ -51,7 +51,7 @@ namespace Ecommerce.Controllers
             if (ModelState.IsValid)
             {
                 var customer = await _userManager.FindByEmailAsync(loginVm.Email);
-                if (Customer != null)
+                if (customer != null)
                 {
                     await _signInManager.SignInAsync(customer, true);
                     return RedirectToAction("Index", "Product");
